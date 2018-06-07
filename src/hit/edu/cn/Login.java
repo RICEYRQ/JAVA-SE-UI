@@ -117,10 +117,6 @@ public class Login extends JDialog {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (pas_enter && !pas_up) {
-					/*if ((JDialog)KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusedWindow() == Login.this) {
-						return;
-					}*/
-					//getFocusTraversalKeysEnabled()
 					toLogin();
 				}
 				if (pas_up && !pas_enter) {
@@ -194,7 +190,9 @@ public class Login extends JDialog {
 			return;
 		}
 		if (na.equals("root") && pa.equals("123")) {
-			JOptionPane.showMessageDialog(contentPanel, "登陆成功！");
+			Login.this.dispose();
+			Show show = new Show();
+			show.show();
 		} else {
 			JOptionPane.showMessageDialog(contentPanel, "用户名或密码错误！");
 		}
