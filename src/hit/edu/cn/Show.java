@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -35,11 +37,13 @@ public class Show extends JFrame implements Runnable {
 	private static JPanel contentPanel;
 	private static JPanel ForTable;
 	private static JPanel ForMenu;
-	private String tableRows[] = {"姓名","性别","工号","成绩"};//表头
+	private String tableRows[] = Data.tableHead;//表头
 	private int ROW_MAX = 100; //表格最大行数
-	private JTable table;
+	private static JTable table;
 	private DefaultTableModel model;
 	private static Show frame;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -105,6 +109,8 @@ public class Show extends JFrame implements Runnable {
 				System.exit(0);
 			}
 		});
+		
+		refreshTable();
 	}
 	
 	private void ForTable() {
@@ -155,54 +161,19 @@ public class Show extends JFrame implements Runnable {
 		JMenuItem addItem = new JMenuItem("添加学生信息");
 		addItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*Add C11 = new Add();
-				C11.show();*/
+				Add add = new Add(frame);
+				add.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				add.setVisible(true);
 			}
 		});
 		message.add(addItem);
 		
-		/*JMenuItem deleteItem = new JMenuItem("删除学生信息");
-		deleteItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		message.add(deleteItem);*/
 		
-		/*JMenuItem findItem = new JMenuItem("搜索学生信息");
-		findItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		message.add(findItem);*/
-		
-		/*JMenuItem changeItem = new JMenuItem("修改学生信息");
-		changeItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		message.add(changeItem);*/
 		
 		JMenuItem showItem = new JMenuItem("刷新学生信息");
 		showItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-				tableModel.setRowCount(0);
-				StudentDao studentDao = new StudentDao();
-				List<Student> list = studentDao.readSql();
-				for(Student student:list){
-					String[] tableColunms = new String[4];
-		        	tableColunms[0]=student.getName();
-		        	tableColunms[1]=student.getSex();
-		        	tableColunms[2]=student.getNum();
-		        	tableColunms[3]=student.getResult();
-		        	tableModel.addRow(tableColunms);
-				}
-				table.invalidate();*/
-				Thread thread = new Thread(frame);
-				thread.start();
+				refreshTable();
 			}
 		});
 		message.add(showItem);
@@ -253,12 +224,14 @@ public class Show extends JFrame implements Runnable {
 		//ForMenu = forMenu;
 		
 		ForMenu.add(Box.createVerticalStrut(0));
+		
 	}
 	
 	public static void delAll() {
 		try {
 			Util.delAllInMes();
 			JOptionPane.showMessageDialog(contentPanel, "清除成功！");
+			refreshTable();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -269,11 +242,72 @@ public class Show extends JFrame implements Runnable {
 	public static void showProgressOk() {
 		JOptionPane.showMessageDialog(contentPanel, "文件备份成功！");
 	}
+	
+	public static void refreshTable() {
+		/*Thread thread = new Thread(frame);
+		thread.start();*/
+		
+		List<Student> list = new ArrayList<>();
+		List<String> list2 = new ArrayList<>();
+		try {
+			list2 = Util.readFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(contentPanel, "读取文件出错！");
+		}
+		System.out.println(list2.size());
+		for(int i = 0; i < list2.size(); i++) {
+			list.add(Util.getStringStudent(list2.get(i)));
+		}
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setRowCount(0);
+		for(Student student:list){
+			String[] tableColunms = new String[8];
+			tableColunms[0] = student.getName();
+			tableColunms[1] = student.getNum();
+			tableColunms[2] = String.valueOf(student.getRank());
+			tableColunms[3] = String.valueOf(student.getAge());
+			tableColunms[4] = student.getSex();
+			tableColunms[5] = student.getClasses();
+			tableColunms[6] = student.getLoveThings();
+			tableColunms[7] = student.getDirection();
+			tableModel.addRow(tableColunms);
+		}
+		table.invalidate();
+	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		List<Student> list = new ArrayList<>();
+		List<String> list2 = new ArrayList<>();
+		try {
+			list2 = Util.readFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(contentPanel, "读取文件出错！");
+		}
+		System.out.println(list2.size());
+		for(int i = 0; i < list2.size(); i++) {
+			list.add(Util.getStringStudent(list2.get(i)));
+		}
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+		tableModel.setRowCount(0);
+		for(Student student:list){
+			String[] tableColunms = new String[8];
+			tableColunms[0] = student.getName();
+			tableColunms[1] = student.getNum();
+			tableColunms[2] = String.valueOf(student.getRank());
+			tableColunms[3] = String.valueOf(student.getAge());
+			tableColunms[4] = student.getSex();
+			tableColunms[5] = student.getClasses();
+			tableColunms[6] = student.getLoveThings();
+			tableColunms[7] = student.getDirection();
+			tableModel.addRow(tableColunms);
+		}
+		table.invalidate();
 	}
 
 }

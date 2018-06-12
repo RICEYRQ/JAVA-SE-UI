@@ -5,19 +5,19 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class DelAll extends JDialog {
+public class CancelAdd extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private static boolean enter = false;
@@ -27,7 +27,7 @@ public class DelAll extends JDialog {
 	 */
 	/*public static void main(String[] args) {
 		try {
-			delAll dialog = new delAll();
+			CancelAdd dialog = new CancelAdd();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -38,14 +38,14 @@ public class DelAll extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DelAll(Show show) {
+	public CancelAdd(Add add) {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager(); 
 		manager.addKeyEventPostProcessor(new KeyEventPostProcessor() {  
 	        public boolean postProcessKeyEvent(KeyEvent event) {  
 	            if (event.getKeyCode() == KeyEvent.VK_ENTER) {  
-	                DelAll.this.dispose();
+	                CancelAdd.this.dispose();
 	            }  
 	            
 	            return false;  
@@ -61,7 +61,7 @@ public class DelAll extends JDialog {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if (enter) {
-					DelAll.this.dispose();
+					CancelAdd.this.dispose();
 				}
 				enter = false;
 			}
@@ -70,7 +70,7 @@ public class DelAll extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JLabel label = new JLabel("确定清除文件内容？");
+			JLabel label = new JLabel("确定取消添加？");
 			label.setBounds(14, 46, 404, 42);
 			label.setFont(new Font("黑体", Font.BOLD, 18));
 			label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,9 +80,8 @@ public class DelAll extends JDialog {
 		JButton confirm = new JButton("确定");
 		confirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DelAll.this.dispose();
-				show.delAll();
-				show.refreshTable();
+				CancelAdd.this.dispose();
+				add.cancelAdd();
 			}
 		});
 		confirm.setBounds(219, 152, 113, 27);
@@ -94,7 +93,7 @@ public class DelAll extends JDialog {
 		JButton cancel = new JButton("取消");
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DelAll.this.dispose();
+				CancelAdd.this.dispose();
 			}
 		});
 		cancel.setBounds(51, 152, 113, 27);
@@ -108,7 +107,5 @@ public class DelAll extends JDialog {
 		
 		setResizable(false);
 	}
-	
-	
 
 }

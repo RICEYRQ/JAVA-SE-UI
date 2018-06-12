@@ -1,10 +1,17 @@
 package hit.edu.cn;
 
 import java.awt.Image;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,6 +41,76 @@ public class Util {
 		bufferedWriter.write("");
 		bufferedWriter.flush();
 		bufferedWriter.close();
+	}
+	
+	public static void addToFile(Student student) throws IOException {
+		File file = new File("message.txt");
+		FileWriter fileWriter = new FileWriter(file, true);
+		PrintWriter printWriter = new PrintWriter(fileWriter);
+		printWriter.print(getStudentString(student));
+		printWriter.println("\r\n");
+		printWriter.flush();
+		
+		fileWriter.flush();
+		printWriter.close();
+		fileWriter.close();
+	}
+	
+	public static List<String> readFile() throws IOException {
+		List<String> list = new ArrayList<>();
+		File file = new File("message.txt");
+		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+		String temp = null;
+		while((temp = bufferedReader.readLine()) != null) {
+			//Student student = getStringStudent(temp);
+			if (temp.equals("")) {
+				continue;
+			}
+			list.add(temp);
+			System.out.println(temp);
+		}
+		bufferedReader.close();
+		
+		return list;
+	}
+	
+	public static Student getStringStudent(String temp) {
+		String[] string = temp.split("$");
+		StringTokenizer strToken=new StringTokenizer(temp,"$");
+		Student student = new Student();
+		List<String> list = new ArrayList<>();
+		while(strToken.hasMoreElements()){ 
+			   list.add(strToken.nextToken());
+		}
+		student.setName(list.get(0));
+		student.setNum(list.get(1));
+		student.setRank(Integer.valueOf(list.get(2)));
+		student.setAge(Integer.valueOf(list.get(3)));
+		student.setSex(list.get(4));
+		student.setClasses(list.get(5));
+		student.setLoveThings(list.get(6));
+		student.setDirection(list.get(7));
+		return student;
+	}
+	
+	private static String getStudentString(Student student) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(student.getName());
+		stringBuilder.append("$");
+		stringBuilder.append(student.getNum());
+		stringBuilder.append("$");
+		stringBuilder.append(student.getRank());
+		stringBuilder.append("$");
+		stringBuilder.append(student.getAge());
+		stringBuilder.append("$");
+		stringBuilder.append(student.getSex());
+		stringBuilder.append("$");
+		stringBuilder.append(student.getClasses());
+		stringBuilder.append("$");
+		stringBuilder.append(student.getLoveThings());
+		stringBuilder.append("$");
+		stringBuilder.append(student.getDirection());
+		return stringBuilder.toString();
 	}
 	
 	

@@ -10,15 +10,15 @@ import java.awt.Shape;
 import javax.swing.JTextField;
 
 public class NameBox extends JTextField {
-    Color bordercolor = UColor.InputDefaultBorderColor;
+    Color bordercolor = Data.InputDefaultBorderColor;
     boolean Cover = false;
     public void BorderHigh() { 
-        bordercolor = UColor.InputDefaultBorderColor;
+        bordercolor = Data.InputDefaultBorderColor;
         Cover = true;
         this.repaint();
     }
     public void BorderLow() {
-        bordercolor = UColor.InputDefaultBorderColor;
+        bordercolor = Data.InputDefaultBorderColor;
         Cover = false;
         this.repaint();
     }
