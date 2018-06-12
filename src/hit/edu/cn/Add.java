@@ -455,7 +455,7 @@ public class Add extends JDialog implements Runnable {
 					
 					Thread thread = new Thread(Add.this);
 					thread.start();
-					show.refreshTable();
+					show.addOk();
 				}
 			}
 		});

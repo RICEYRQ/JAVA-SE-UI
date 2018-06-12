@@ -132,6 +132,8 @@ public class Show extends JFrame implements Runnable {
 		}*/
 		table.invalidate();
 		
+		refreshTable();
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -201,6 +203,16 @@ public class Show extends JFrame implements Runnable {
 		});
 		action.add(copyItem);
 		
+		JMenuItem backItem = new JMenuItem("还原");
+		backItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Back back = new Back(frame);
+				back.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				back.setVisible(true);
+			}
+		});
+		action.add(backItem);
+		
 		JMenuItem aboutItem = new JMenuItem("关于");
 		aboutItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -239,8 +251,18 @@ public class Show extends JFrame implements Runnable {
 		}
 	}
 	
+	public static void addOk() {
+		JOptionPane.showMessageDialog(contentPanel, "添加成功！");
+		refreshTable();
+	}
+	
 	public static void showProgressOk() {
 		JOptionPane.showMessageDialog(contentPanel, "文件备份成功！");
+	}
+	
+	public static void showBackOk() {
+		JOptionPane.showMessageDialog(contentPanel, "文件还原成功！");
+		refreshTable();
 	}
 	
 	public static void refreshTable() {
@@ -256,7 +278,7 @@ public class Show extends JFrame implements Runnable {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(contentPanel, "读取文件出错！");
 		}
-		System.out.println(list2.size());
+		//System.out.println(list2.size());
 		for(int i = 0; i < list2.size(); i++) {
 			list.add(Util.getStringStudent(list2.get(i)));
 		}
