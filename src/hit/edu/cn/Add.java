@@ -460,7 +460,7 @@ public class Add extends JDialog implements Runnable {
 			}
 		});
 		confirm.setBounds(219, 400, 113, 27);
-		confirm.setIcon(Util.getIcon2("image/OK.png", confirm, (float) 0.8));
+		confirm.setIcon(Util.getIcon2("/image/OK.png", confirm, (float) 0.8));
 		confirm.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		
 		contentPanel.add(confirm);
@@ -474,7 +474,7 @@ public class Add extends JDialog implements Runnable {
 			}
 		});
 		cancel.setBounds(51, 400, 113, 27);
-		cancel.setIcon(Util.getIcon2("image/cancel.png", cancel, (float) 0.8));
+		cancel.setIcon(Util.getIcon2("/image/cancel.png", cancel, (float) 0.8));
 		cancel.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		
 		contentPanel.add(cancel);

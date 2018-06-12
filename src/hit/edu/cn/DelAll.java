@@ -86,7 +86,7 @@ public class DelAll extends JDialog {
 			}
 		});
 		confirm.setBounds(219, 152, 113, 27);
-		confirm.setIcon(Util.getIcon2("image/OK.png", confirm, (float) 0.8));
+		confirm.setIcon(Util.getIcon2("/image/OK.png", confirm, (float) 0.8));
 		confirm.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		
 		contentPanel.add(confirm);
@@ -98,7 +98,7 @@ public class DelAll extends JDialog {
 			}
 		});
 		cancel.setBounds(51, 152, 113, 27);
-		cancel.setIcon(Util.getIcon2("image/cancel.png", cancel, (float) 0.8));
+		cancel.setIcon(Util.getIcon2("/image/cancel.png", cancel, (float) 0.8));
 		cancel.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		
 		cancel.requestDefaultFocus();

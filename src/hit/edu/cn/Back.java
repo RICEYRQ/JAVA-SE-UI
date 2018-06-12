@@ -85,7 +85,7 @@ public class Back extends JDialog implements Runnable {
 			}
 		});
 		choose.setBounds(310, 74, 105, 27);
-		choose.setIcon(Util.getIcon2("image/path.png", choose, (float) 0.8));
+		choose.setIcon(Util.getIcon2("/image/path.png", choose, (float) 0.8));
 		choose.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		contentPanel.add(choose);
 		
@@ -101,7 +101,7 @@ public class Back extends JDialog implements Runnable {
 			}
 		});
 		copy.setBounds(151, 131, 113, 27);
-		copy.setIcon(Util.getIcon2("image/reset.png", copy, (float) 0.8));
+		copy.setIcon(Util.getIcon2("/image/reset.png", copy, (float) 0.8));
 		copy.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		contentPanel.add(copy);
 		
@@ -132,9 +132,9 @@ public class Back extends JDialog implements Runnable {
 		// TODO Auto-generated method stub
 		try {
 			File file = new File("message.txt");
-			if (file.exists()) {
+			/*if (file.exists()) {
 				file.delete();
-			}
+			}*/
 			fileOutputStream = new FileOutputStream("message.txt");
 			fileInputStream = new FileInputStream(path.getText());
 			DecimalFormat df=new DecimalFormat("#.##%");

@@ -137,7 +137,7 @@ public class Login extends JDialog {
 			}
 		});
 		login.setBounds(213, 192, 113, 27);
-		login.setIcon(Util.getIcon2("image/OK.png", login, (float) 0.8));
+		login.setIcon(Util.getIcon2("/image/OK.png", login, (float) 0.8));
 		login.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		contentPanel.add(login);
 		
@@ -149,7 +149,7 @@ public class Login extends JDialog {
 			}
 		});
 		reset.setBounds(75, 192, 113, 27);
-		reset.setIcon(Util.getIcon2("image/reset.png", reset, (float) 0.8));
+		reset.setIcon(Util.getIcon2("/image/reset.png", reset, (float) 0.8));
 		reset.setHorizontalTextPosition(SwingConstants.RIGHT); 
 		contentPanel.add(reset);
 		
@@ -172,7 +172,7 @@ public class Login extends JDialog {
 		showHidePas.setOpaque(false);
 		//showHidePas.setBorder(null);
 		showHidePas.setBounds(319, 117, 33, 27);
-		showHidePas.setIcon(Util.getIcon("image/showpas.png", showHidePas));
+		showHidePas.setIcon(Util.getIcon("/image/showpas.png", showHidePas));
 		contentPanel.add(showHidePas);
 		
 		setResizable(false);

@@ -19,7 +19,7 @@ import javax.swing.JButton;
 public class Util {
 	//压缩图片适应不带文字button
 	public static ImageIcon getIcon(String file, JButton iconButton) {  
-        ImageIcon icon = new ImageIcon(file);  
+        ImageIcon icon = new ImageIcon(Login.class.getResource(file));  
         Image temp = icon.getImage().getScaledInstance(iconButton.getWidth(),  
                 iconButton.getHeight(), icon.getImage().SCALE_DEFAULT);  
         icon = new ImageIcon(temp);
@@ -28,7 +28,7 @@ public class Util {
 	
 	//压缩图片适应带文字button
 	public static ImageIcon getIcon2(String file, JButton iconButton, float percent) {  
-        ImageIcon icon = new ImageIcon(file);  
+        ImageIcon icon = new ImageIcon(Login.class.getResource(file));  
         Image temp = icon.getImage().getScaledInstance((int)(iconButton.getHeight() * percent),  
         		(int)(iconButton.getHeight() * percent), icon.getImage().SCALE_DEFAULT); 
         icon = new ImageIcon(temp);
@@ -58,7 +58,11 @@ public class Util {
 	
 	public static List<String> readFile() throws IOException {
 		List<String> list = new ArrayList<>();
+		
 		File file = new File("message.txt");
+		if (!file.exists()) {
+			file.createNewFile();
+		}
 		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 		String temp = null;
 		while((temp = bufferedReader.readLine()) != null) {
@@ -81,6 +85,9 @@ public class Util {
 		List<String> list = new ArrayList<>();
 		while(strToken.hasMoreElements()){ 
 			   list.add(strToken.nextToken());
+		}
+		if (list.size() != 8) {
+			return null;
 		}
 		student.setName(list.get(0));
 		student.setNum(list.get(1));

@@ -280,7 +280,9 @@ public class Show extends JFrame implements Runnable {
 		}
 		//System.out.println(list2.size());
 		for(int i = 0; i < list2.size(); i++) {
-			list.add(Util.getStringStudent(list2.get(i)));
+			if (Util.getStringStudent(list2.get(i)) != null) {
+				list.add(Util.getStringStudent(list2.get(i)));
+			}
 		}
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);
